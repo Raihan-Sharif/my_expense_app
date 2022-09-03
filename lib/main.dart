@@ -50,6 +50,8 @@ class MyHomePage extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +75,26 @@ class MyHomePage extends StatelessWidget {
           Card(
             child: Column(
               children: <Widget>[
-                TextField(decoration: InputDecoration(labelText: 'Title,')),
-                TextField(decoration: InputDecoration(labelText: 'Amount,')),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Title,'),
+                  controller: titleController,
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Amount,'),
+                  controller: amountController,
+                ),
               ],
             ),
           ),
           ElevatedButton(
-            onPressed: () => {},
-            child: Text('Add Transactions'),
+            onPressed: () => {print(titleController.text)},
+            child: Text(
+              'Add Transactions',
+            ),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.purple),
+              elevation: MaterialStateProperty.all(10),
+            ),
           ),
           Column(
             children: myTransactionList.map((tx) {
