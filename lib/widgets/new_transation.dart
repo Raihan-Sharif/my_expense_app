@@ -2,12 +2,31 @@ import 'package:flutter/material.dart';
 
 typedef void MyCallback(String title, double amount);
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final MyCallback addTransaction;
 
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
   NewTransaction(this.addTransaction);
+
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
+  void dataSubmitted() {
+    final String title = titleController.text;
+    final double amount = double.parse(amountController.text);
+    if (title.isEmpty || amount <= 0) {
+      print('Data is not vaild!');
+      return;
+    } else {
+      print('Data is vaild!');
+    }
+    widget.addTransaction(title, amount);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +36,16 @@ class NewTransaction extends StatelessWidget {
           TextField(
             decoration: InputDecoration(labelText: 'Title,'),
             controller: titleController,
+            onSubmitted: (_) => dataSubmitted(),
           ),
           TextField(
             decoration: InputDecoration(labelText: 'Amount,'),
             controller: amountController,
+            onSubmitted: (_) => dataSubmitted(),
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
           ),
           ElevatedButton(
-            onPressed: () => {
-              addTransaction(
-                titleController.text,
-                double.parse(amountController.text),
-              )
-            },
+            onPressed: () => dataSubmitted(),
             child: Text(
               'Add Transactions',
             ),
