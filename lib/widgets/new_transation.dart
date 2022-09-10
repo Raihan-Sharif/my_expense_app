@@ -26,6 +26,7 @@ class _NewTransactionState extends State<NewTransaction> {
       print('Data is vaild!');
     }
     widget.addTransaction(title, amount);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -50,7 +51,7 @@ class _NewTransactionState extends State<NewTransaction> {
               'Add Transactions',
             ),
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.purple),
+              // backgroundColor: MaterialStateProperty.all(Colors.purple),
               elevation: MaterialStateProperty.all(10),
             ),
           ),

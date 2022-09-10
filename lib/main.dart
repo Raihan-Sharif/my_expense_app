@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import './widgets/new_transation.dart';
 import './widgets/transaction_list.dart';
@@ -12,6 +14,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "My Expense App",
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+        fontFamily: 'Roboto',
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'Bluetea',
+            fontSize: 25,
+          ),
+        ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -105,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.infinity,
               child: Card(
                 elevation: 5,
-                color: Colors.amberAccent,
+                color: Theme.of(context).primaryColor,
                 child: Text(
                   "Chart",
                   textAlign: TextAlign.center,
