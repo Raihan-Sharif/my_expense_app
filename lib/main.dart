@@ -17,10 +17,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
         fontFamily: 'Roboto',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              subtitle2: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.amber,
+              ),
+              bodyText1: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 16,
+                color: Colors.amberAccent,
+              ),
+              bodyText2: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
             fontFamily: 'Bluetea',
             fontSize: 25,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -36,7 +55,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Transactions> _transactionList = [
-    Transactions(
+    /* Transactions(
       id: 1,
       title: 'Buy Shirt',
       amount: 1500,
@@ -66,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 10000,
       date: DateTime.now(),
     ),
+    */
   ];
 
   void _addTransaction(String txTitle, double txAmount) {
@@ -124,7 +144,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            TransactionList(_transactionList),
+            SizedBox(
+              height: 70,
+            ),
+            _transactionList.isEmpty
+                ? Container(
+                    height: 500,
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          'Sorry no data found. Please add first.',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Image.asset('assets/images/No_data.png'),
+                      ],
+                    ),
+                  )
+                : TransactionList(_transactionList),
           ],
         ),
       ),
