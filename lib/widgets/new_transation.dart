@@ -5,7 +5,7 @@ typedef void MyCallback(String title, double amount);
 class NewTransaction extends StatefulWidget {
   final MyCallback addTransaction;
 
-  NewTransaction(this.addTransaction);
+  const NewTransaction(this.addTransaction, {Key? key}) : super(key: key);
 
   @override
   State<NewTransaction> createState() => _NewTransactionState();

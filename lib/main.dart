@@ -89,11 +89,17 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   void _addTransaction(String txTitle, double txAmount) {
-    var maxId = _transactionList.reduce(
-        (currentTx, nextTx) => currentTx.id > nextTx.id ? currentTx : nextTx);
-
+    int id = 0;
+    if (_transactionList.isNotEmpty) {
+      var maxId = _transactionList.reduce(
+          (currentTx, nextTx) => currentTx.id > nextTx.id ? currentTx : nextTx);
+      // print('Max Id:  ${maxId.id}');
+      id = maxId.id + 1;
+    } else {
+      id += 1;
+    }
     final newTx = Transactions(
-      id: 10,
+      id: id,
       title: txTitle,
       amount: txAmount,
       date: DateTime.now(),
